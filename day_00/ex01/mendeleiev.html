@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Mandeleiev</title>
+  <title>Mendeleiev</title>
   <style>
     body {
       background-color: grey;
@@ -17,6 +17,11 @@
       font-family: "Lucida Console", Courier, monospace;
     }
 
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
     .periodic {
       position: relative;
       height: 200px;
@@ -26,7 +31,7 @@
 
     .periodic-row {
       clear: both;
-      height: 10%;
+      height: 30%;
     }
 
     .cell {
@@ -54,12 +59,12 @@
     .at_num,
     .at_details {
       position: absolute;
-      font-size: 4px;
+      font-size: 8px;
       color: rgba(255, 255, 255, 0.5);
     }
 
     .at_num {
-      top: 3px;
+      bottom: 3px;
       left: 3px;
     }
 
@@ -69,7 +74,7 @@
       left: 0px;
       right: 0px;
       margin-top: -4px;
-      font-size: 9px;
+      font-size: 15px;
       line-height: 1;
       height: 9px;
       color: rgba(255, 255, 255, 0.9);
@@ -105,8 +110,8 @@
 </head>
 
 <body>
-  <h1>MANDELEIEV</h1>
-  <div class="periodic">
+  <h1>MENDELEIEV</h1>
+  <div class="periodic" contenteditable="true">
     <div class="periodic-row">
       <div class="cell">
         <div class="element">
@@ -997,6 +1002,10 @@
       </div>
     </div>
     <div style="clear: both;"></div>
+    <hr size="5" width="100%" color="grey">
+    <div class="image"><img
+        src="https://leblob.fr/sites/default/files/styles/2cols/public/2019-05/Ruedesarchives.1682508_0.JPG?itok=4Ks2lhs8"
+        alt="mendeleiev" width=100% height=100% /></div>
   </div>
 </body>
 
