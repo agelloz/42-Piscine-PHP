@@ -2,7 +2,7 @@
 <?PHP
 function ft_split($line)
 {
-	$tab = explode(" ", trim($line));
+	$tab = preg_split('/ +/', trim($line, $character_mask = " \t"));
 	if (empty($tab))
 		return null;
 	sort($tab);
