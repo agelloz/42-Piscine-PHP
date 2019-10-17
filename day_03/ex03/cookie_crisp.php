@@ -1,0 +1,19 @@
+<?php
+if (isset($_GET["action"]) && isset($_GET["name"]))
+{
+    if ($_GET["action"] == "del")
+    {
+		if (isset($_COOKIE[$_GET["name"]]))
+			setcookie($_GET["name"], "", -1);
+    }
+    elseif ($_GET["action"] == "set")
+    {
+		setcookie($_GET["name"], $_GET["value"]);
+	}
+    elseif ($_GET["action"] == "get")
+    {
+		if (isset($_COOKIE[$_GET["name"]]))
+			echo $_COOKIE[$_GET["name"]]."\n";
+	}
+}
+?>
