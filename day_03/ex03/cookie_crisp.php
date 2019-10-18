@@ -1,11 +1,12 @@
 <?php
-date_default_timezone_set('Europe/paris');
-if (!isset($_GET["action"]) || !isset($_GET["name"]))
-	return null;
-if ($_GET["action"] == "set")
-	setcookie($_GET["name"], $_GET["value"], 0, '/');
-elseif ($_GET["action"] == "get" && isset($_COOKIE[$_GET["name"]]))
-	echo $_COOKIE[$_GET["name"]] . "\n";
-elseif (($_GET["action"] == "del") && isset($_COOKIE[$_GET["name"]]))
-	setcookie($_GET["name"], "", time() - 3600);
+if (isset($_GET['action']))
+{
+    if ($_GET['action'] == "set" && isset($_GET['name']) && isset($_GET['value']))
+        setcookie($_GET['name'], $_GET['value'], 0);
+    elseif ($_GET['action'] == "get")
+        if ($_COOKIE[$_GET['name']])
+            echo $_COOKIE[$_GET['name']] . "\n";
+    elseif ($_GET['action'] == "del" && isset($_GET['name']))
+        setcookie($_GET['name'], '', -1);
+}
 ?>
