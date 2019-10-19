@@ -1,139 +1,69 @@
 <?php
-    $hostname = "127.0.0.1";
-    $username = "raphael";
-    $password = "raphael";
-    if ($con = mysqli_connect($hostname, $username, $password, "rush00_test"))
-      echo "Connection initiated successfully <br /><br />";
-    else
-      echo "Connection failed: ".mysqli_connect_error()."<br /><br />";
-    //$db = "users";
-    //mysqli_select_db($con,$db);
-    $field = "id";
-    $db = "rush00_test_10";
-    $query = "DROP DATABASE $db";
-    if ($con->query($query) === TRUE) 
-    {
-      printf("Database $db droppe avec succès.<br /><br />");
-    }
-    else 
-      echo("Error description: " . mysqli_error($con))."<br /><br />";
-    $query2 = "USE $db";
-    //$con->select_db("rush00_test_5");
-    if (($con->query($query2)) === TRUE) 
-    {
-      printf("Use database successfully performed <br /><br />");
-      //while ($row = mysqli_fetch_row($res))
-      //  echo $row[0], '<br/>';
-    }
-    else 
-      echo("Error description: <br /> " . mysqli_error($con). "<br /><br />");
-    $table = "prout";
-    $query3 = "CREATE TABLE `categories` (
-      `cat_id` int(11) NOT NULL,
-      `cat_name` text NOT NULL,
-      `parent_id` int(100) NOT NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-    //$con->select_db("rush00_test_5");
-    if ($res = ($con->query($query3)) === TRUE) 
-    {
-      printf("Table successfully created <br /><br />");
-      //while ($row = mysqli_fetch_row($res))
-      //  echo $row[0], '<br/>';
-    }
-    else 
-      echo("Error description:" . mysqli_error($con))."<br /><br />";
+$con = new mysqli("127.0.0.1", "root", "root");
+if ($con->connect_error)
+  die("Connection failed: " . $con->connect_error . "\n");
 
-    $query4 = "INSERT INTO `categories` (`cat_id`, `cat_name`, `parent_id`) VALUES
-    (1, 'Beauty', 0),
-    (2, 'Hair', 0),
-    (3, 'Scent', 0),
-    (4, 'Gifts', 0)";
-    
-    /*CINSERT INTO `categories` (`cat_id`, `cat_name`, `parent_id`) VALUES
-    (1, 'Beauty', 0),
-    (2, 'Hair', 0),
-    (3, 'Scent', 0),
-    (4, 'Gifts', 0);*/
-    //$con->select_db("rush00_test_5");
-    if ($res = ($con->query($query4)) === TRUE) 
-    {
-      printf("Data succesfully inserted<br /><br />");
-      //while ($row = mysqli_fetch_row($res))
-      //  echo $row[0], '<br/>';
-    }
-    else 
-      echo("Error description: <br /> " . mysqli_error($con)."<br /><br />");
+$sql = "CREATE DATABASE shop";
+if ($con->query($sql) === FALSE)
+  echo "Error creating database: " . $con->error . "\n";
 
-      $query2 = "USE $db";
-      //$con->select_db("rush00_test_5");
-      if (($con->query($query2)) === TRUE) 
-      {
-        printf("Use database successfully performed <br /><br />");
-        //while ($row = mysqli_fetch_row($res))
-        //  echo $row[0], '<br/>';
-      }
-      else 
-        echo("Error description: <br /> " . mysqli_error($con). "<br /><br />");
+if ($con->query("USE shop") === FALSE)
+  echo "Error using database: " . $con->error . "\n";
 
+$sql = "CREATE TABLE users (
+  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+  login TEXT NOT NULL,
+  password TEXT NOT NULL,
+  is_admin BOOLEAN DEFAULT 0
+  )";
+if ($con->query($sql) === FALSE)
+  echo "Error creating users table: " . $con->error . "\n";
 
-      $table = "prout";
-      $query3 = "CREATE TABLE `jouets` (
-        `cat_id` int(11) NOT NULL,
-        `cat_name` text NOT NULL,
-        `parent_id` int(100) NOT NULL
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-      //$con->select_db("rush00_test_5");
-      if ($res = ($con->query($query3)) === TRUE) 
-      {
-        printf("Table successfully created <br /><br />");
-        //while ($row = mysqli_fetch_row($res))
-        //  echo $row[0], '<br/>';
-      }
-      else 
-        echo("Error description:" . mysqli_error($con))."<br /><br />";
-  
-      $query4 = "INSERT INTO `jouets` (`cat_id`, `cat_name`, `parent_id`) VALUES
-      (1, 'Beauty', 0),
-      (2, 'Hair', 0),
-      (3, 'Scent', 0),
-      (4, 'Gifts', 0)";
-      
-      /*CINSERT INTO `categories` (`cat_id`, `cat_name`, `parent_id`) VALUES
-      (1, 'Beauty', 0),
-      (2, 'Hair', 0),
-      (3, 'Scent', 0),
-      (4, 'Gifts', 0);*/
-      //$con->select_db("rush00_test_5");
-      if ($res = ($con->query($query4)) === TRUE) 
-      {
-        printf("Data succesfully inserted<br /><br />");
-        //while ($row = mysqli_fetch_row($res))
-        //  echo $row[0], '<br/>';
-      }
-      else 
-        echo("Error description: <br /> " . mysqli_error($con)."<br /><br />");
+$sql = "INSERT INTO users (login, password, is_admin)
+VALUES ('antoine', '0551539a10837302f19a57160fe1fe2d6e259cb1ed1ea05b06b9ecd7e2185854e42c6047a85a2248c21f18ae9e20e0a73c1c23d0b0e33427088b2ba5dbdad053', 1),
+('raphael', '12be7ff2ca30575b989645c7686e4511c80d53a2033fc1d5adc323ace7d3dbd91bd14db7bb7e9ed06a1d2d100487f87bbbafcbe1e93f0f050d60d01e8e1a9393', 1)";
+if ($con->query($sql) === FALSE)
+  echo "Error adding admin user: " . $con->error . "\n";
 
+$sql = "CREATE TABLE products (
+  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+  name TEXT NOT NULL,
+  price INT UNSIGNED,
+  stock INT UNSIGNED,
+  img TEXT NOT NULL,
+  cat TEXT NOT NULL)";
+if ($con->query($sql) === FALSE)
+  echo "Error creating products table: " . $con->error . "\n";
 
-    /*if ($result = mysqli_query($con, "SELECT Name FROM City LIMIT 10")) 
-    {
-      printf("Select a retourné %d lignes.\n", $result->num_rows);
-      $result->close();
-    }*/
+$sql = "INSERT INTO products (name, price, stock, img, cat) VALUES 
+('iMac 5K', 2000, 10, 'https://uno.ma/media/catalog/product/cache/1/image/598x598/9df78eab33525d08d6e5fb8d27136e95/l/d/ld0004425692_2_0004428833_2.jpg', 'computers'),
+('Macbook Pro', 1000, 5, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh2qpzEjIMuyJkn5xn7xGT2ZNaUxIyCcm8vFv-gKEjHBbxp0ZL', 'computers'),
+('Socks', 1000, 999, 'https://i.etsystatic.com/6572991/r/il/933c89/1623581850/il_570xN.1623581850_i7es.jpg', 'clothing'),
+('Google Pixel 4', 800, 8, 'https://lh3.googleusercontent.com/4OtWqGvnS_CAZWUR0cCHJxJba3cIJTJg-qnLp8LgcxaM6jzq4yd87Xx4zvx22Sm4tWJzpeH8Wk3XiyCj6zX51GI=rw-w640', 'phones')";
+if ($con->query($sql) === FALSE)
+  echo "Error adding products user: " . $con->error . "\n";
 
-    /*if ($result = $mysqli->query("SELECT $field FROM $database LIMIT 10"))
-    {
-      printf("Select a retourné %d lignes.\n", $result->num_rows);
-    }
-    else 
-      echo "-- RATE\n";*/
+$sql = "CREATE TABLE categories (
+cat_id INT UNSIGNED NOT NULL,
+cat_name TEXT NOT NULL,
+parent_id INT UNSIGNED)";
+if ($con->query($sql) === FALSE)
+  echo "Error creating categories table: " . $con->error . "\n";
 
-    /*if ($sql = file_get_contents("database.sql"))
-      echo "CCOOL\n";
-    else
-    {
-      echo "PROUT\n";
-      $sql_array = explode(";", $sql);
-      foreach ($sql_array as $elem) 
-        mysqli_query($connection, $elem);
-    }*/
+$sql = "INSERT INTO categories (cat_id, cat_name, parent_id) VALUES
+(1, 'computers', 0),
+(2, 'clothing', 0),
+(3, 'phones', 0)";
+if ($con->query($sql) === FALSE)
+  echo "Error adding products user: " . $con->error . "\n";
+
+$sql = "CREATE TABLE cart (
+  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED,
+  product_id INT UNSIGNED,
+  quantity INT UNSIGNED)";
+  if ($con->query($sql) === FALSE)
+    echo "Error creating cart table: " . $con->error . "\n";
+
+$con->close();
 ?>

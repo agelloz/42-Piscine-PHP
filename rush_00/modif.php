@@ -1,51 +1,32 @@
 <?php
-
-function are_credentials_correct($pwd_file)
-{
-    if (file_exists($pwd_file) == FALSE)
-        return (FALSE);
-    $old_hashed_pwd = hash('whirlpool', $_POST["oldpw"]);
-    $unser_accounts = unserialize(file_get_contents($pwd_file));
-    if (empty($unser_accounts))
-        return (FALSE);
-	foreach ($unser_accounts as $user)
-		if ($user["login"] == $_POST["login"] && $user["passwd"] == $old_hashed_pwd)
-            return (TRUE);
-	return (FALSE);
-}
-
-function modify_password($pwd_dir, $pwd_file)
-{
-    $new_hashed_pwd = hash('whirlpool', $_POST["newpw"]);
-    $unser_accounts = unserialize(file_get_contents($pwd_file));
-    if (empty($unser_accounts))
-    {
-        echo "ERROR\n";
-        return (NULL);
-    }
-    foreach ($unser_accounts as &$user)
-    {
-        if ($_POST["login"] == $user["login"])
-        {
-            $user["passwd"] = $new_hashed_pwd;
-            $user["mdp"] = $_POST["newpw"];
-        }
-    }
-    $accounts[] = serialize($unser_accounts);
-    file_put_contents($pwd_file, $accounts);
-}
-
+session_start();
+$con = mysqli_connect("127.0.0.1", "root", "root", "shop");
 if (!isset($_POST["submit"]) || !isset($_POST["login"]) || !isset($_POST["oldpw"])
  || !isset($_POST["newpw"]) || $_POST["submit"] != "OK")
     return NULL;
-$pwd_dir = "../private";
-$pwd_file = $pwd_dir . "/passwd";
-if (are_credentials_correct($pwd_file) == TRUE && $_POST["login"] != NULL && $_POST["newpw"] != NULL)
+if ($_POST["login"] != NULL && $_POST["oldpw"] != NULL && $_POST["newpw"])
 {
-    modify_password($pwd_dir, $pwd_file);
-    header("Refresh: 2;url=index.html");
-    echo "OK\n";
+    $old_hashed_pwd = hash('whirlpool', $_POST["oldpw"]);
+    $query_check = "SELECT * FROM users WHERE login='".$_POST["login"]."' AND password='".$old_hashed_pwd."'";
+    $run = mysqli_query($con, $query_check);
+    if ($run && mysqli_num_rows($run))
+    {
+        $query = "UPDATE users SET password='".$old_hashed_pwd."' WHERE login='".$_POST["login"]."'";
+        $run_pro = mysqli_query($con, $query);
+        if (!$run_pro)
+            die("ERROR: ".mysqli_error($con));
+        echo "Password successfully changed\n";
+        header("Refresh: 2;url=index.php");
+    }
+    else
+    {
+        header("Refresh: 2;url=modif.html");
+        echo "Wrong credentials.\n";
+    }
 }
 else
-    echo "ERROR\n";
+{
+    header("Refresh: 2;url=modif.html");
+    echo "Wrong credentials.\n";
+}
 ?>

@@ -1,4 +1,54 @@
 body {
-    font-family: Arial;
+    font-family: 'Courier New', Courier, monospace;
     padding: 10px;
   }
+.main-nav {
+  font-size: 16px;
+  list-style-type: none;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px #D3D3D3;
+  }
+.periodic {
+    position: relative;
+    height: 20vw;
+    margin-right: -1px;
+    text-shadow: none;
+}
+.periodic-row {
+    clear: both;
+    height: 30%;
+}
+.tags {
+    float: left;
+    width: 10%;
+    height: 10%; 
+}
+.cell {
+    float: left;
+    position: relative;
+    width: 15.55%;
+    height: 100%;
+}
+h1 {
+    color: black;
+    font-size: 5vw;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+h3 {
+    color: black;
+    font-size: 1vw;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+img {
+    margin: 0.875% 0;
+    display: block;
+    border: 1px solid;
+}
+.logo {
+  width: 10%;
+  height: 10%;
+  border: none;
+}
