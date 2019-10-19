@@ -4,10 +4,14 @@ function auth($login, $passwd)
 {
     $con = mysqli_connect("127.0.0.1", "root", "root", "shop");
     $hashed_pwd = hash('whirlpool', $_POST["passwd"]);
-    $query_check = "SELECT login FROM users WHERE login='" . $_POST["login"] . "' AND password='" . $hashed_pwd . "'";
-    $run = mysqli_query($con, $query_check);
-    if ($run && mysqli_num_rows($run))
+    $query_check = "SELECT * FROM users WHERE login='" . $_POST["login"] . "' AND password='" . $hashed_pwd . "'";
+    $result = mysqli_query($con, $query_check);
+    if ($result && mysqli_num_rows($result))
+    {
+        $row_user = mysqli_fetch_array($result);
+        $_SESSION["user_id"] = $row_product['id'];
         return (TRUE);
+    }
     else
         return (FALSE);
 }

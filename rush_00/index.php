@@ -2,6 +2,8 @@
 <?php
 include('admin_functions.php');
 session_start();
+if (!isset($_SESSION["user_id"]))
+    $_SESSION["user_id"] = 42;
 ?>
 <html>
     <head>
