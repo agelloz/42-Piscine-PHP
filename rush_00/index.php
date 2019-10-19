@@ -10,6 +10,9 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
+        <div class="header" href="index.php">
+            <a href="index.php"><img class="logo" src="images/logo.png"/></a>
+        </div>
         <form action="login.php" method="post">
             Identifiant: <input type="text" name="login" value=""/>
             <br />
