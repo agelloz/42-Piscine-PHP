@@ -47,5 +47,4 @@ if (are_credentials_correct($pwd_file) == TRUE && $_POST["login"] != NULL && $_P
 }
 else
     echo "ERROR\n";
-//print("<pre>" . print_r(unserialize(file_get_contents($pwd_file)), true) . "</pre>");
 ?>

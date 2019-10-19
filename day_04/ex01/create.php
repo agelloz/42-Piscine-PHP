@@ -20,7 +20,7 @@ function create_account($pwd_dir, $pwd_file)
     $hashed_pwd = hash('whirlpool', $_POST["passwd"]);
     if (file_exists($pwd_file) == TRUE)
         $unser_accounts = unserialize(file_get_contents($pwd_file));
-    $unser_accounts[] = array('login' => $_POST["login"], 'passwd' => $hashed_pwd, 'mdp' => $_POST["passwd"]);
+    $unser_accounts[] = array('login' => $_POST["login"], 'passwd' => $hashed_pwd);
     $accounts[] = serialize($unser_accounts);
     file_put_contents($pwd_file, $accounts);
 }
@@ -36,5 +36,4 @@ if (is_login_exists($pwd_file) == FALSE && $_POST["login"] != NULL && $_POST["pa
 }
 else
     echo "ERROR\n";
-//print("<pre>" . print_r(unserialize(file_get_contents($pwd_file)), true) . "</pre>");
 ?>

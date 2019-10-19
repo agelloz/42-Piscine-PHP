@@ -43,7 +43,7 @@ $pwd_file = $pwd_dir . "/passwd";
 if (are_credentials_correct($pwd_file) == TRUE && $_POST["login"] != NULL && $_POST["newpw"] != NULL)
 {
     modify_password($pwd_dir, $pwd_file);
-    header("Refresh: 2;url=index.php");
+    header("Refresh: 2;url=index.html");
     echo "OK\n";
 }
 else
