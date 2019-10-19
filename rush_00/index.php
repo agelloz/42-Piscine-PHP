@@ -1,4 +1,14 @@
+<?php
+    session_start();
+?>
+<!DOCTYPE html>
+<?php
+    include('functions.php');
+?>
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
     <body>
         <form action="login.php" method="post">
             Identifiant: <input type="text" name="login" value=""/>
