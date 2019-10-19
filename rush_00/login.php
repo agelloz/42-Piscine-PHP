@@ -9,7 +9,7 @@ function auth($login, $passwd)
     if ($result && mysqli_num_rows($result))
     {
         $row_user = mysqli_fetch_array($result);
-        $_SESSION["user_id"] = $row_product['id'];
+        $_SESSION["user_id"] = $row_user['id'];
         return (TRUE);
     }
     else

@@ -48,7 +48,14 @@ img {
     border: 1px solid;
 }
 .logo {
-  width: 10%;
+  width: 5%;
   height: 10%;
   border: none;
 }
+.divimg {
+    overflow: hidden;
+    border: none;
+}
+a:hover {
+    background-color: gold;
+  }

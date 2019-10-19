@@ -5,15 +5,16 @@ function    view_users()
     $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
     $run = mysqli_query($con, $get_users);
 
+    echo "<br /><br /><br /><b>List of users: </b><br /><br />";
     while ($row_users = mysqli_fetch_array($run)) 
     {
         $user_login = $row_users['login'];
         if ($user_status = $row_users['is_admin'])
-            $status = "admin";
+            $status = "<u>(ADMIN rights)</u>";
         else
-            $status = "regular";
+            $status = "(regular rights)";
         if ($user_login)
-            echo "<li>$user_login - $status</li>";
+            echo "<b>$user_login</b> - $status"."<br />";
     }
 }
 ?>
