@@ -12,6 +12,7 @@
         <div class="header" href="index.php">
             <a href="index.php"><img class="logo" src="images/logo.png"/></a>
         </div>
+        <h2> Our incredible products </h2>
         <div class="main-nav">
             <?php ft_retrieve_cats(); ?>
         </div>

@@ -5,12 +5,12 @@ function ft_retrieve_cats()
     $query_cats = "SELECT * FROM categories";
     if (($result = $con->query($query_cats)) === FALSE)
         echo "Error - no categories found\n";
-    echo "<div class=tags>";
-    echo "<div><a href='products.php?cat=all'>all</a></div>";
+    echo "<div class='tags'>";
+    echo "<div class=cats><a href='products.php?cat=all'>all</a></div>";
     while ($row_cat = mysqli_fetch_array($result)) 
     {
         $cat_name = $row_cat['cat_name'];
-        echo "<div><a href='products.php?cat=$cat_name'>$cat_name</a></div>";
+        echo "<div class=cats><a href='products.php?cat=$cat_name'>$cat_name</a></div>";
     }
     echo "</div>";
 }

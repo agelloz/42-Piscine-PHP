@@ -11,7 +11,7 @@ function ft_get_products_by_cat()
     {
         $product_id = $row_product['id'];
         $product_name = $row_product['name'];
-        $product_price = $row_product['price'];
+        $product_price = number_format($row_product['price'], 2, ',', ' ');
         $product_stock = $row_product['stock'];
         $product_img = $row_product['img'];
         $product_cat = $row_product['cat'];
@@ -19,11 +19,10 @@ function ft_get_products_by_cat()
         echo "
         <div id='product'>
             <div class='cell'>
-            <h3>$product_name</h3>
+            <h3>$product_name for only <br />$product_price €</h3>
             <a href='products.php?cat=all'>
-            <img src='$product_img' height='150' />
+            <img class=products src='$product_img' height='150' width='150'/>
             </a>
-            <h3>$product_price $</h3>
             <form action='checkout.php' method='post'>
                 <input type='text' name='quantity' value='1'/>
                 <input type='submit' name='trash' value='Discount ! - Add to cart'/>

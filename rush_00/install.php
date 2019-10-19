@@ -37,9 +37,9 @@ if ($con->query($sql) === FALSE)
 
 $sql = "INSERT INTO products (name, price, stock, img, cat) VALUES 
 ('iMac 5K', 2000, 10, 'https://uno.ma/media/catalog/product/cache/1/image/598x598/9df78eab33525d08d6e5fb8d27136e95/l/d/ld0004425692_2_0004428833_2.jpg', 'computers'),
-('Macbook Pro', 1000, 5, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh2qpzEjIMuyJkn5xn7xGT2ZNaUxIyCcm8vFv-gKEjHBbxp0ZL', 'computers'),
-('Socks', 1000, 999, 'https://i.etsystatic.com/6572991/r/il/933c89/1623581850/il_570xN.1623581850_i7es.jpg', 'clothing'),
-('Google Pixel 4', 800, 8, 'https://lh3.googleusercontent.com/4OtWqGvnS_CAZWUR0cCHJxJba3cIJTJg-qnLp8LgcxaM6jzq4yd87Xx4zvx22Sm4tWJzpeH8Wk3XiyCj6zX51GI=rw-w640', 'phones')";
+('Macbook Pro', 1000, 5, 'https://images-na.ssl-images-amazon.com/images/I/51v8KXJ0nlL._SX425_.jpg', 'computers'),
+('Pair of socks', 1000, 999, 'https://i.etsystatic.com/6572991/r/il/933c89/1623581850/il_570xN.1623581850_i7es.jpg', 'clothing'),
+('Google Pixel 4', 800, 8, 'https://static.toiimg.com/photo/66350481.cms', 'phones')";
 if ($con->query($sql) === FALSE)
   echo "Error adding products user: " . $con->error . "\n";
 
@@ -59,7 +59,7 @@ if ($con->query($sql) === FALSE)
 
 $sql = "CREATE TABLE cart (
   id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id INT UNSIGNED,
+  user_id TEXT NOT NULL,
   product_id INT UNSIGNED,
   quantity INT UNSIGNED)";
   if ($con->query($sql) === FALSE)

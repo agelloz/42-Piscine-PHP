@@ -24,10 +24,17 @@ body {
     width: 10%;
     height: 10%; 
 }
+.cats {
+    float: left;
+    position: relative;
+    width: 200%;
+    height: 100%;
+    text-align: center;
+}
 .cell {
     float: left;
     position: relative;
-    width: 15.55%;
+    width: 22.55%;
     height: 100%;
 }
 h1 {
@@ -39,13 +46,17 @@ h1 {
 h3 {
     color: black;
     font-size: 1vw;
-    text-align: center;
+    text-align: left;
     font-family: 'Courier New', Courier, monospace;
 }
 img {
-    margin: 0.875% 0;
     display: block;
     border: 1px solid;
+}
+.products {
+    position: relative;
+    float: left;
+    border: 2px solid grey;
 }
 .logo {
   width: 5%;
