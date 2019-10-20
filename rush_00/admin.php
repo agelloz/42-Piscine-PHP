@@ -257,7 +257,7 @@ if (!isset($_SESSION["user_id"]))
 
             echo "Product_img_link (facultative): "."    "."<br />";
             echo "<input type='text' name='product_img' style='width: 400px' value=''/><br />";
-
+            //PARTIE FACULTATIVE
             $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
             $query_view_categories = "SELECT cat_id, cat_name FROM `categories`";
             if (!($result_view_categories = $con->query($query_view_categories)))
@@ -273,7 +273,8 @@ if (!isset($_SESSION["user_id"]))
                     echo "<br />";
                 }
             }
-            
+            //PARTIE FACULTATIVE
+
             echo "<input type='submit' name='action' value='add_product'/>"."<br />";
             echo "</form>";
 
