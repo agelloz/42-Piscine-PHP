@@ -71,3 +71,6 @@ img {
 a:hover {
     background-color: gold;
   }
+input:focus {
+    background-color: lightblue;
+  }
