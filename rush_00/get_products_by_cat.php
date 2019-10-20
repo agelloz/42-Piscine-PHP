@@ -14,6 +14,7 @@ function get_products_by_cat()
         FROM products, categories, links_products_categories
         WHERE products.stock > 0 GROUP BY products.id";
     $result = $con->query($query_products);
+    echo "<div class='wrapper'>";
     while ($row_product = mysqli_fetch_array($result))
     {
         $product_id = $row_product['id'];
@@ -21,22 +22,18 @@ function get_products_by_cat()
         $product_price = number_format($row_product['price'], 2, ',', ' ');
         $product_img = $row_product['img'];
         $flag = 1;
-        echo "<div id = periodic-row>";
         echo "
-        <div id='product'>
-            <div class='cell'>
+        <div class='cell'>
             <h3>$product_name for only <br />$product_price €</h3>
-            <a href='products.php?cat=all'><img class=products src='$product_img'/></a>
+            <a href='products.php?cat=all'><img class='products' src='$product_img'/></a>
             <form action='add_to_cart.php' method='POST'>
                 <input type='text' name='qty' value='1' size='3'/>
                 <input type='hidden' name='id' value='$product_id'/>
                 <input type='submit' value='Add to cart'/>
             </form>
-            </div>
-        </div>
-        ";
-        echo "</div>";
+        </div>";
     }
+    echo "</div>";
     if ($flag == 0)
         echo "Sorry we don't have any products in stock. Please come back later !<br />";
 }

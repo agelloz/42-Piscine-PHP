@@ -7,7 +7,10 @@ if (($result = $con->query($query_delete_from_cart)) == FALSE)
     echo "Error ".mysqli_error($con)."<br>";
 if ($_SESSION["loggued_on_user"] != NULL)
 {
-    echo "<head><link rel='stylesheet' type='text/css' href='style.css'></head><html><body><h2>See you soon " . $_SESSION["loggued_on_user"] . "!</h2></body></html>";
+    echo "<head><link rel='stylesheet' type='text/css' href='style.css'>
+    </head><html><body><h2>
+        See you soon " . $_SESSION["loggued_on_user"] . "!
+    </h2></body></html>";
     header("Refresh: 1;url=index.php");
 }
 $_SESSION["loggued_on_user"] =  NULL;

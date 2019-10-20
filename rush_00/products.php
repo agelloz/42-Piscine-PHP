@@ -12,6 +12,7 @@
         <div class="main-nav">
             <?php retrieve_cats(); ?>
         </div>
+        <br>
         <ul class="main-nav">
             <?php get_products_by_cat(); ?>
         </ul>

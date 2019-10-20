@@ -12,9 +12,7 @@ session_start();
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <div class="header" href="index.php">
-            <a href="index.php"><img class="logo" src="images/logo.png"/></a>
-        </div>
+        <a  class='logo' href='index.php'><img class='logo' src="images/logo.png" width=8%/></a>
         <?php
         echo "<h2>Your cart</h2>";
         if (isset($_POST["remove_from_cart"]) && $_POST["remove_from_cart"] == "yes")

@@ -38,13 +38,13 @@ $sql = "INSERT INTO products (name, price, stock, img) VALUES
 ('iMac 5K', 2000, 100, 'https://uno.ma/media/catalog/product/cache/1/image/598x598/9df78eab33525d08d6e5fb8d27136e95/l/d/ld0004425692_2_0004428833_2.jpg'),
 ('Macbook Pro', 1000, 100, 'https://images-na.ssl-images-amazon.com/images/I/51v8KXJ0nlL._SX425_.jpg'),
 ('Pair of socks', 1000, 100, 'https://i.etsystatic.com/6572991/r/il/933c89/1623581850/il_570xN.1623581850_i7es.jpg'),
-('Google Pixel 4', 800, 100, 'https://static.toiimg.com/photo/66350481.cms')";
+('Google Pixel 4', 800, 100, 'https://cdn.futura-sciences.com/buildsv6/images/wide1920/c/8/4/c84a5bfd07_50155953_pixel-4-google-pixel-4-xl-2.jpg')";
 if ($con->query($sql) === FALSE)
   echo "Error adding products user: " . $con->error . "\n";
 
 $sql = "CREATE TABLE categories (
-cat_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-cat_name TEXT NOT NULL)";
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name TEXT NOT NULL)";
 
 if ($con->query($sql) === FALSE)
   echo "Error creating categories table: " . $con->error . "\n";

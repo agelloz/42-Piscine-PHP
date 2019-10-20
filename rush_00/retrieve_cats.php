@@ -10,10 +10,10 @@ function retrieve_cats()
     GROUP BY categories.name, categories.id";
     if (($result = $con->query($query_cats)) === FALSE)
         echo "Error - no categories found\n";
-    echo "<div class='tags'>";
-    echo "<div class=cats><a href='products.php?cat=all'>all</a></div>";
+    echo "<div><ul>";
+    echo "<li><a href='products.php?cat=all'>all</a></li>";
     while ($row_cat = mysqli_fetch_array($result)) 
-        echo "<div class=cats><a href='products.php?cat=" . $row_cat['id'] . "'>" . $row_cat['name'] . "</a></div>";
-    echo "</div>";
+        echo "<li><a href='products.php?cat=" . $row_cat['id'] . "'>" . $row_cat['name'] . "</a></li>";
+    echo "</ul></div>";
 }
 ?>

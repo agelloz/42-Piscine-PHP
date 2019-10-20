@@ -20,7 +20,7 @@ function display_cart()
             $total = number_format($total, 2, ',', ' ');
             echo $cart_product_quantity." <b>".$cart_product_name."</b> at ".$price." € each for a total of <b>$total</b> € (VAT included)";
             echo "<form action='checkout.php' method='post'>
-                    <input type='submit' name='trash' value='Remove all those products'/>
+                    <input type='submit' name='trash' value='Remove products'/>
                     <input type='hidden' name='product_id' value='$product_id'/>
                     <input type='hidden' name='remove_from_cart' value='yes'/>
                 </form><br>";
@@ -30,8 +30,7 @@ function display_cart()
             echo "<br> Your cart is currenty empty. Want to see our <a href='index.php'>best products</a>? </b><br>";
         else
         {
-            echo "<br> <u>Total order amount</u>: <b>".$supertotal." € (VAT included)</b><br>";
-            //<!--<TO BE FINISHED>--->
+            echo "<br> <u>Total order amount</u>: <b>" . $supertotal . " € (VAT included)</b><br>";
             echo " <br><form action='index.php' method='post'>
                         <input type='submit' name='trash' value='Continue shopping'/>
                     </form><br>";
@@ -39,12 +38,17 @@ function display_cart()
             {
                 echo "<form action='checkout.php' method='post'>
                         <input type='hidden' name='checkout' value='yes'/>
-                        <input type='submit' name='trash' value='Complete your order'/>
+                        <input type='submit' name='complete' value='Complete your order'/>
                         </form><br>";
             }
             else
-                echo "<br />To complete your order, please <a href='login.html'>log in</a> or 
-                <a href='signup.html'>sign up</a> first. <br />Dont' worry, we will remember your cart contents.<br />";
+                echo "<br>
+                To complete your order, please 
+                <a href='login.html'>log in</a> 
+                or 
+                <a href='signup.html'>sign up</a> 
+                first.<br>
+                Dont' worry, we will save your cart contents.<br>";
         }
     }
 }

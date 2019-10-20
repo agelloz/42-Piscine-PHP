@@ -17,41 +17,44 @@ include('admin_functions.php');
     </head>
     <body>
         <div class="header" href="index.php">
-            <a href="index.php"><img class="logo" src="images/logo.png"/></a>
-            <?php 
-            if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"]) echo "<p>Hello " . $_SESSION["loggued_on_user"] . "!</p>";
-            if (!isset($_SESSION["loggued_on_user"]) || $_SESSION["loggued_on_user"] == NULL)
-            {
-                echo "<a href='signup.html'>Sign up</a> - ";
-                echo "<a href='login.html'>Log in</a> - ";
-            }
-            else
-            {
-                echo "<a href='logout.php'>Log out</a> - ";
-                echo "<a href='modif.html'>Change your password</a> - ";
-            }
-            if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"] != NULL && $_SESSION["admin"] == TRUE)
-                echo "<a href='admin.php'>Admin</a> - ";
-            if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"] != NULL)
-                echo "<a href=\"delete_account.php\" onclick=\"return confirm('Are you sure?');\">Delete my account</a> - ";
-            $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
-            $sql = "SELECT products.name FROM cart, products WHERE products.id = cart.product_id AND cart.user_id='" . $_SESSION["user_id"] . "' GROUP BY products.name";
-            $run = mysqli_query($con, $sql);
-            $i = 0;
-            while ($res = mysqli_fetch_array($run))
-                $i++;
-            if ($i != 0)
-                echo "<a href='checkout.php'>Your cart (". $i . ")</h2></a>";
-            else
-                echo "<a href='checkout.php'>Your cart</h2></a>";
-            ?>
+            <a  class='logo' href='index.php'><img class='logo' src="images/logo.png" width=8%/></a>
+            <ul>
+                <?php
+                if (!isset($_SESSION["loggued_on_user"]) || $_SESSION["loggued_on_user"] == NULL)
+                {
+                    echo "<li><a href='signup.html'>Sign up</a></li>";
+                    echo "<li><a href='login.html'>Log in</a></li>";
+                }
+                $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
+                $sql = "SELECT products.name FROM cart, products WHERE products.id = cart.product_id
+                AND cart.user_id='" . $_SESSION["user_id"] . "' GROUP BY products.name";
+                $run = mysqli_query($con, $sql);
+                $i = 0;
+                while ($res = mysqli_fetch_array($run))
+                    $i++;
+                if ($i != 0)
+                    echo "<li><a href='checkout.php'>My cart (". $i . ")</h2></a></li>";
+                else
+                    echo "<li><a href='checkout.php'>My cart</h2></a></li>";
+                if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"] != NULL
+                && $_SESSION["admin"] == TRUE)
+                    echo "<li><a href='admin.php'>Admin</a></li>";
+                if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"] != NULL)
+                    echo "<li><a href=\"delete_account.php\" onclick=\"return confirm('Are you sure?');\">
+                    Delete my account</a></li>";
+                if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"] != NULL)
+                {
+                    echo "<li><a href='modif.html'>Change my password</a></li>";
+                    echo "<li><a href='logout.php'>Log out</a></li>";
+                }
+                if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"]) 
+                    echo "<li><a href='index.php'>Hello " . $_SESSION["loggued_on_user"] . "!</a></li>";
+                ?>
+            </ul>
         </div>
-        <div>
-            <?php 
-                echo "<iframe name='products' frameborder='0' src='products.php' width='100%' height='500px'></iframe>";
-            ?>
-        </div>
-        <hr size="5" width="100%" color="white">
-        <?php debug_view(); ?>
+        <?php 
+            echo "<div><iframe name='products' frameborder='0' src='products.php' width='100%'
+            height='500px'></iframe></div>";
+        ?>
     </body>
 </html>

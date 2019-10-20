@@ -13,7 +13,7 @@ if ($_POST["login"] != NULL && $_POST["passwd"] != NULL
     if ($run && mysqli_num_rows($run))
     {
         $_SESSION["user"] = $_POST["login"];
-        echo "Account exists already. You have been signed in.\n";
+        echo "<head><link rel='stylesheet' type='text/css' href='style.css'></head><html><body><h2>Account exists already. You have been signed in :)</h2></body></html>";
         header("Refresh: 2;url=index.php");
     }
     else
