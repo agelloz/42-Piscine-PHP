@@ -14,10 +14,11 @@ function display_cart()
             $cart_product_name = $row_cart['name'];
             $cart_product_quantity = $row_cart['SUM(cart.quantity)'];
             $product_id = $row_cart['product_id'];
+            $price = number_format($row_cart['price'], 2, ',', ' ');
             $total = $cart_product_quantity * $row_cart['price'];
             $supertotal = $supertotal + $total;
             $total = number_format($total, 2, ',', ' ');
-            echo $cart_product_quantity." <b>".$cart_product_name."</b> for a total of $total € (VAT included)";
+            echo $cart_product_quantity." <b>".$cart_product_name."</b> at ".$price." € each for a total of <b>$total</b> € (VAT included)";
             echo "<form action='checkout.php' method='post'>
                     <input type='submit' name='trash' value='Remove all those products'/>
                     <input type='hidden' name='product_id' value='$product_id'/>

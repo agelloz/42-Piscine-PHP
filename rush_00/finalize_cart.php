@@ -23,14 +23,20 @@ function finalize_cart()
                 $query_delete_stock_from_products = "UPDATE `products` SET `stock` = $updated_stock WHERE `products`.`id` = $check_quantities_product_id";
                 if (($result = $con->query($query_delete_stock_from_products)) == FALSE)
                 {
-                    echo "Error updating products for product id".$check_quantities_product_id."   ".mysqli_error($con)."<br />";
+                    echo "Error deleting available products from stock".$check_quantities_product_id."   ".mysqli_error($con)."<br />";
                 }
                 else
                     //echo "WELL UPDATED STOCK<br />";
                 
                 $query_empty_cart = "DELETE FROM `cart` WHERE `cart`.`user_id` = $user_id AND cart.product_id = $check_quantities_product_id";
                 if (($result = $con->query($query_empty_cart)) == FALSE)
-                    echo "Error updating products for product id".$check_quantities_product_id."   ".mysqli_error($con)."<br />";
+                    echo "Error emptying cart on available products".$check_quantities_product_id."   ".mysqli_error($con)."<br />";
+                //else
+                    //echo "WELL EMPTIED CART LINES<br />";
+
+                $query_add_order_table = "INSERT INTO `orders` (`id`, `user_id`, `product_id`, `quantity`) VALUES (NULL, $user_id, $check_quantities_product_id, $check_quantities_product_stock_needed)";
+                if (($result = $con->query($query_add_order_table)) == FALSE)
+                    echo "Error adding cart to order base on available products".$check_quantities_product_id."   ".mysqli_error($con)."<br />";
                 //else
                     //echo "WELL EMPTIED CART LINES<br />";
                 

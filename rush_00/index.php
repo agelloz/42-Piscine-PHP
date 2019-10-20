@@ -28,7 +28,7 @@ include('admin_functions.php');
             else
             {
                 echo "<a href='logout.php'>Log out</a> - ";
-                echo "<a href='modif.html'>Change password</a> - ";
+                echo "<a href='modif.html'>Change your password</a> - ";
             }
             if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"] != NULL && $_SESSION["admin"] == TRUE)
                 echo "<a href='admin.php'>Admin</a> - ";
