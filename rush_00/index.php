@@ -4,7 +4,6 @@ include('admin_functions.php');
 session_start();
 if (!isset($_SESSION["user_id"]))
     $_SESSION["user_id"] = hash('whirlpool', "guest_".session_id());
-//echo "Session User_id is ".$_SESSION["user_id"]."<br />";
 ?>
 <html>
     <head>
@@ -27,8 +26,19 @@ if (!isset($_SESSION["user_id"]))
                 echo "<a href='logout.php'>Log out</a> - ";
                 echo "<a href='modif.html'>Change password</a> - ";
             }
+            if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"])
+                echo "<a href='admin.php'>Admin</a> - ";
+            $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
+            $sql = "SELECT products.name FROM cart, products WHERE products.id = cart.product_id AND cart.user_id='" . $_SESSION["user_id"] . "' GROUP BY products.name";
+            $run = mysqli_query($con, $sql);
+            $i = 0;
+            while ($res = mysqli_fetch_array($run))
+                $i++;
+            if ($i != 0)
+                echo "<a href='checkout.php'>Your cart (". $i . ")</h2></a>";
+            else
+                echo "<a href='checkout.php'>Your cart</h2></a>";
             ?>
-            <a href="checkout.php">Your cart</h2></a>
         </div>
         <div>
             <?php 
@@ -36,6 +46,6 @@ if (!isset($_SESSION["user_id"]))
             ?>
         </div>
         <hr size="5" width="100%" color="white">
-        <?php view_users(); ?>
+        <?php debug_view(); ?>
     </body>
 </html>

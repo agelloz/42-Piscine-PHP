@@ -1,20 +1,25 @@
 <?php
-function    view_users()
+function    debug_view()
 {
-    $get_users = "SELECT * FROM users";
     $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
-    $run = mysqli_query($con, $get_users);
-
-    echo "<br /><br /><br /><b><u>List of users</u>: </b><br /><br />";
-    while ($row_users = mysqli_fetch_array($run)) 
+    $sql = "SELECT * FROM users";
+    $run = mysqli_query($con, $sql);
+    echo "<br>Users: (session id:" . $_SESSION["user_id"] . " user:" . $_SESSION["loggued_on_user"] . ")<br><br>";
+    while ($res = mysqli_fetch_array($run)) 
     {
-        $user_login = $row_users['login'];
-        if ($user_status = $row_users['is_admin'])
-            $status = "<u>(ADMIN rights)</u>";
+        if ($user_status = $res['is_admin'])
+            $status = "admin";
         else
-            $status = "(regular rights)";
-        if ($user_login)
-            echo "<b>$user_login</b> - $status"."<br />";
+            $status = "regular";
+        echo $res['login'] . " - $status - id:" . $res['id'];
+        if ($_SESSION["user_id"] == $res['id'])
+            echo " - loggued in";
+        echo "<br>";
     }
+    $sql = "SELECT cart.product_id, products.name, SUM(cart.quantity) FROM cart, products WHERE products.id = cart.product_id AND cart.user_id='". $_SESSION["user_id"] . "' GROUP BY cart.product_id";
+    $run = mysqli_query($con, $sql);
+    echo "<br>Cart:<br><br>";
+    while ($res = mysqli_fetch_array($run)) 
+        echo $res['name'] . " - " . $res['SUM(cart.quantity)'] . "<br>";
 }
 ?>

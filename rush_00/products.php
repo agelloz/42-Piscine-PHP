@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <?php
     session_start();
-    include('ft_get_products_by_cat.php');
-    include('ft_retrieve_cats.php');
+    include('get_products_by_cat.php');
+    include('retrieve_cats.php');
 ?>
 <html>
     <head>
@@ -10,13 +10,10 @@
     </head>
     <body>
         <div class="main-nav">
-            <?php ft_retrieve_cats(); ?>
+            <?php retrieve_cats(); ?>
         </div>
         <ul class="main-nav">
-            <?php ft_get_products_by_cat(); ?>
-            <li>
-                <form action="add_to_cart.php"></form>
-            </li>
+            <?php get_products_by_cat(); ?>
         </ul>
     </body>
 </html>
