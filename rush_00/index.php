@@ -15,22 +15,27 @@ if (!isset($_SESSION["user_id"]))
     <body>
         <div class="header" href="index.php">
             <a href="index.php"><img class="logo" src="images/logo.png"/></a>
-            <a href="signup.html"><h2>Sign up</a> - 
-            <a href="login.html">Log in</a> - 
             <?php 
-            if ($_SESSION["loggued_on_user"])
+            if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"]) echo "<p>Hello " . $_SESSION["loggued_on_user"] . "!</p>";
+            if (!isset($_SESSION["loggued_on_user"]) || $_SESSION["loggued_on_user"] == "")
+            {
+                echo "<a href='signup.html'>Sign up</a> - ";
+                echo "<a href='login.html'>Log in</a> - ";
+            }
+            else
             {
                 echo "<a href='logout.php'>Log out</a> - ";
                 echo "<a href='modif.html'>Change password</a> - ";
             }
             ?>
-            <a href="products.php?cat=all">Discover our products</a> -
-            <a href="checkout.php">Check your cart</h2></a>
-
+            <a href="checkout.php">Your cart</h2></a>
         </div>
-
+        <div>
+            <?php 
+                echo "<iframe name='products' frameborder='0' src='products.php' width='100%' height='500px'></iframe>";
+            ?>
+        </div>
         <hr size="5" width="100%" color="white">
-        <?php if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"]) echo "<p>Hello " . $_SESSION["loggued_on_user"] . " !</p>"; ?>
         <?php view_users(); ?>
     </body>
 </html>
