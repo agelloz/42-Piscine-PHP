@@ -24,14 +24,11 @@ function get_products_by_cat()
             <div id='product'>
                 <div class='cell'>
                 <h3>$product_name for only <br />$product_price €</h3>
-                <a href='products.php?cat=all'>
-                <img class=products src='$product_img'/>
-                </a>
-                <form action='add_to_cart.php' method='get'>
-                    <input type='text' name='qty' value='1'/>
-                    <input type='submit' name='add' value='Add to cart'/>
-                    <input type ='hidden' name='id' value='$product_id'/>
-                    <input type='hidden' name='add_to_cart' value='yes'/>
+                <a href='products.php?cat=all'><img class=products src='$product_img'/></a>
+                <form action='add_to_cart.php' method='POST'>
+                    <input type='text' name='qty' value='1' size='3'/>
+                    <input type='hidden' name='id' value='$product_id'/>
+                    <input type='submit' value='Add to cart'/>
                 </form>
                 </div>
             </div>
@@ -40,8 +37,6 @@ function get_products_by_cat()
         }
     }
     if ($flag == 0)
-    {
         echo "Sorry we don't have any products in stock. Please come back later !<br />";
-    }
 }
 ?>

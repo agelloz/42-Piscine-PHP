@@ -10,6 +10,7 @@ function auth($login, $passwd)
     {
         $row_user = mysqli_fetch_array($result);
         $_SESSION["user_id"] = $row_user['id'];
+        $_SESSION["admin"] = $row_user['is_admin'];
         return (TRUE);
     }
     else
@@ -20,18 +21,19 @@ session_start();
 if (!isset($_POST["login"]) && !isset($_POST["passwd"]))
 {
     $_SESSION["loggued_on_user"] = "";
-    echo "ERROR\n";
-    return (NULL);
+    echo "Wrong credentials, please try again.\n";
+    header("Refresh: 1;url=login.html");
 }
-if ($_POST["login"] != NULL && $_POST["passwd"] != NULL && auth($_POST["login"], $_POST["passwd"]) == TRUE)
+elseif ($_POST["login"] != NULL && $_POST["passwd"] != NULL && auth($_POST["login"], $_POST["passwd"]) == TRUE)
 {
     $_SESSION["loggued_on_user"] = $_POST["login"];
-    echo "Hello " . $_SESSION["loggued_on_user"] . " !\n";
-    header("Refresh: 1;url=index.php");
-}    
+    echo "<head><link rel='stylesheet' type='text/css' href='style.css'></head><html><body><h2>Hello " . $_SESSION["loggued_on_user"] . "!</h2></body></html>";
+    header("Refresh: 2;url=index.php");
+}
 else
 {
     $_SESSION["loggued_on_user"] = "";
-	echo "ERROR\n";
+    echo "Wrong credentials, please try again.\n";
+    header("Refresh: 2;url=login.html");
 }
 ?>

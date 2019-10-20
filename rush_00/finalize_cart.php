@@ -1,5 +1,5 @@
 <?php 
-function ft_finalize_cart() 
+function finalize_cart() 
 {
     $con = mysqli_connect("127.0.0.1", "root", "root", "shop");
     $user_id = $_SESSION["user_id"];

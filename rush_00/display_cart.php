@@ -2,7 +2,8 @@
 function display_cart() 
 {
     $con = mysqli_connect("127.0.0.1", "root", "root", "shop");
-    $query_display_cart = "SELECT cart.product_id, products.price, products.img, products.name, SUM(cart.quantity) FROM cart, products WHERE products.id = cart.product_id GROUP BY cart.product_id";
+    $query_display_cart = "SELECT cart.product_id, products.price, products.img, products.name, SUM(cart.quantity) FROM cart, products 
+    WHERE products.id = cart.product_id AND cart.user_id='" . $_SESSION['user_id'] . "' GROUP BY cart.product_id";
     if (!($result = $con->query($query_display_cart)))
         echo "Error <br>";
     else
@@ -22,38 +23,28 @@ function display_cart()
                     <input type='submit' name='trash' value='Remove all those products'/>
                     <input type='hidden' name='product_id' value='$product_id'/>
                     <input type='hidden' name='remove_from_cart' value='yes'/>
-                </form>
-                <br />
-            ";
+                </form><br>";
         }
         $supertotal = number_format($supertotal, 2, ',', ' ');
         if ($supertotal == 0)
-        {
-            echo "<br /> Your cart is currenty empty. Want to see our <a href='products.php'>best products</a> ? </b><br />";
-        }
+            echo "<br> Your cart is currenty empty. Want to see our <a href='index.php'>best products</a>? </b><br>";
         else
         {
-            echo "<br /> <u>Total order amount</u> : <b>".$supertotal." € (VAT included)</b><br />";
+            echo "<br> <u>Total order amount</u>: <b>".$supertotal." € (VAT included)</b><br>";
             //<!--<TO BE FINISHED>--->
-            echo " <br />
-            <form action='index.php' method='post'>
-            <input type='submit' name='trash' value='Add new products to cart'/>
-                </form>
-                <br />
-            ";
-            if ($_SESSION["loggued_on_user"])
+            echo " <br><form action='index.php' method='post'>
+                        <input type='submit' name='trash' value='Continue shopping'/>
+                    </form><br>";
+            if ($_SESSION["loggued_on_user"] != NULL)
             {
                 echo "<form action='checkout.php' method='post'>
                         <input type='hidden' name='checkout' value='yes'/>
                         <input type='submit' name='trash' value='Complete your order'/>
-                        </form>
-                        <br />
-                ";
+                        </form><br>";
             }
             else
-            {
-                echo "<br />To complete your order, please <a href='login.html'>log in</a> or <a href='signup.html'>sign up</a> first. <br />Dont' worry, we will remember your cart contents.<br />";
-            }
+                echo "<br />To complete your order, please <a href='login.html'>log in</a> or 
+                <a href='signup.html'>sign up</a> first. <br />Dont' worry, we will remember your cart contents.<br />";
         }
     }
 }

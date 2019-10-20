@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <?php
-include('admin_functions.php');
 session_start();
 if (!isset($_SESSION["user_id"]))
     $_SESSION["user_id"] = hash('whirlpool', "guest_".session_id());
+if (!isset($_SESSION["admin"]))
+    $_SESSION["admin"] = FALSE;
+include('admin_functions.php');
 ?>
 <html>
     <head>
@@ -16,7 +18,7 @@ if (!isset($_SESSION["user_id"]))
             <a href="index.php"><img class="logo" src="images/logo.png"/></a>
             <?php 
             if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"]) echo "<p>Hello " . $_SESSION["loggued_on_user"] . "!</p>";
-            if (!isset($_SESSION["loggued_on_user"]) || $_SESSION["loggued_on_user"] == "")
+            if (!isset($_SESSION["loggued_on_user"]) || $_SESSION["loggued_on_user"] == NULL)
             {
                 echo "<a href='signup.html'>Sign up</a> - ";
                 echo "<a href='login.html'>Log in</a> - ";
@@ -26,7 +28,7 @@ if (!isset($_SESSION["user_id"]))
                 echo "<a href='logout.php'>Log out</a> - ";
                 echo "<a href='modif.html'>Change your password</a> - ";
             }
-            if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"])
+            if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"] != NULL && $_SESSION["admin"] == TRUE)
                 echo "<a href='admin.php'>Admin</a> - ";
             $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
             $sql = "SELECT products.name FROM cart, products WHERE products.id = cart.product_id AND cart.user_id='" . $_SESSION["user_id"] . "' GROUP BY products.name";

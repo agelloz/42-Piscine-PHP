@@ -1,8 +1,7 @@
 <?php
-include('add_to_cart.php');
 include('display_cart.php');
 include('remove_from_cart.php');
-include('ft_finalize_cart.php');
+include('finalize_cart.php');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -13,30 +12,20 @@ session_start();
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-    <div class="header" href="index.php">
+        <div class="header" href="index.php">
             <a href="index.php"><img class="logo" src="images/logo.png"/></a>
         </div>
         <?php
         echo "<h2>Your cart</h2>";
-        if (isset($_POST["add_to_cart"]) && $_POST["add_to_cart"] == "yes")
-        {
-            $_SESSION["quantity"] = $_POST["quantity"];
-            $_SESSION["product_id"] = $_POST["product_id"];
-            add_to_cart();
-            $_POST["add_to_cart"] = "";
-            echo "We have updated your cart with the new products<br /><br />";
-        }
         if (isset($_POST["remove_from_cart"]) && $_POST["remove_from_cart"] == "yes")
         {
             $_SESSION["product_id"] = $_POST["product_id"];
             remove_from_cart();
-            $_POST["remove_from_cart"] = "";
+            $_POST["remove_from_cart"] = NULL;
             echo "We have updated your cart, removing the products you asked<br /><br />";
         }
         if (isset($_POST["checkout"]) && $_POST["checkout"] == "yes")
-        {
-            ft_finalize_cart();
-        }
+            finalize_cart();
         display_cart();
         ?>
     </body>
