@@ -44,7 +44,7 @@ if ($con->query($sql) === FALSE)
   echo "Error adding products user: " . $con->error . "\n";
 
 $sql = "CREATE TABLE categories (
-cat_id INT UNSIGNED NOT NULL,
+cat_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 cat_name TEXT NOT NULL)";
 if ($con->query($sql) === FALSE)
   echo "Error creating categories table: " . $con->error . "\n";
