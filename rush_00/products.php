@@ -12,7 +12,19 @@
         <div class="header" href="index.php">
             <a href="index.php"><img class="logo" src="images/logo.png"/></a>
         </div>
-        <h2> Our incredible products </h2>
+        <div class="header" href="index.php">
+            <a href="signup.html"><h2>Sign up</a> - 
+            <a href="login.html">Log in</a> - 
+            <?php 
+            if ($_SESSION["loggued_on_user"])
+            {
+                echo "<a href='logout.php'>Log out</a> - ";
+                echo "<a href='modif.html'>Change password</a> - ";
+            }
+            ?>
+            <a href="products.php?cat=all">Discover our products</a> -
+            <a href="checkout.php">Check your cart</h2></a>
+        </div>
         <div class="main-nav">
             <?php ft_retrieve_cats(); ?>
         </div>

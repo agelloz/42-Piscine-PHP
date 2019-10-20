@@ -24,7 +24,9 @@ if (!isset($_SESSION["user_id"]))
                 echo "<a href='modif.html'>Change password</a> - ";
             }
             ?>
-            <a href="products.php?cat=all">Discover our products</h2></a>
+            <a href="products.php?cat=all">Discover our products</a> -
+            <a href="checkout.php">Check your cart</h2></a>
+
         </div>
 
         <hr size="5" width="100%" color="white">

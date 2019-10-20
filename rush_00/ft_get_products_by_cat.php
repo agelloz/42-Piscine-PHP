@@ -27,6 +27,7 @@ function ft_get_products_by_cat()
                 <input type='text' name='quantity' value='1'/>
                 <input type='submit' name='trash' value='Discount ! - Add to cart'/>
                 <input type='hidden' name='product_id' value='$product_id'/>
+                <input type='hidden' name='add_to_cart' value='yes'/>
             </form>
             </div>
         </div>
