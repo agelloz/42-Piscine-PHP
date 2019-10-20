@@ -5,7 +5,7 @@ function    view_users()
     $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
     $run = mysqli_query($con, $get_users);
 
-    echo "<br /><br /><br /><b><u>List of users</u>: </b><br /><br />";
+    echo "<br /><b><u>List of users</u>: </b><br /><br />";
     while ($row_users = mysqli_fetch_array($run)) 
     {
         $user_login = $row_users['login'];

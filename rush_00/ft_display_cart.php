@@ -42,11 +42,12 @@ function ft_display_cart()
             ";
             if ($_SESSION["loggued_on_user"])
             {
-                echo "<form action='index.php' method='post'>
-            <input type='submit' name='trash' value='Complete your order'/>
-                </form>
-                <br />
-            ";
+                echo "<form action='checkout.php' method='post'>
+                        <input type='hidden' name='checkout' value='yes'/>
+                        <input type='submit' name='trash' value='Complete your order'/>
+                        </form>
+                        <br />
+                ";
             }
             else
             {

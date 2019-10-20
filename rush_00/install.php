@@ -36,24 +36,23 @@ if ($con->query($sql) === FALSE)
   echo "Error creating products table: " . $con->error . "\n";
 
 $sql = "INSERT INTO products (name, price, stock, img, cat) VALUES 
-('iMac 5K', 2000, 10, 'https://uno.ma/media/catalog/product/cache/1/image/598x598/9df78eab33525d08d6e5fb8d27136e95/l/d/ld0004425692_2_0004428833_2.jpg', 'computers'),
-('Macbook Pro', 1000, 5, 'https://images-na.ssl-images-amazon.com/images/I/51v8KXJ0nlL._SX425_.jpg', 'computers'),
-('Pair of socks', 1000, 999, 'https://i.etsystatic.com/6572991/r/il/933c89/1623581850/il_570xN.1623581850_i7es.jpg', 'clothing'),
-('Google Pixel 4', 800, 8, 'https://static.toiimg.com/photo/66350481.cms', 'phones')";
+('iMac 5K', 2000, 100, 'https://uno.ma/media/catalog/product/cache/1/image/598x598/9df78eab33525d08d6e5fb8d27136e95/l/d/ld0004425692_2_0004428833_2.jpg', 'computers'),
+('Macbook Pro', 1000, 100, 'https://images-na.ssl-images-amazon.com/images/I/51v8KXJ0nlL._SX425_.jpg', 'computers'),
+('Pair of socks', 1000, 100, 'https://i.etsystatic.com/6572991/r/il/933c89/1623581850/il_570xN.1623581850_i7es.jpg', 'clothing'),
+('Google Pixel 4', 800, 100, 'https://static.toiimg.com/photo/66350481.cms', 'phones')";
 if ($con->query($sql) === FALSE)
   echo "Error adding products user: " . $con->error . "\n";
 
 $sql = "CREATE TABLE categories (
 cat_id INT UNSIGNED NOT NULL,
-cat_name TEXT NOT NULL,
-parent_id INT UNSIGNED)";
+cat_name TEXT NOT NULL)";
 if ($con->query($sql) === FALSE)
   echo "Error creating categories table: " . $con->error . "\n";
 
-$sql = "INSERT INTO categories (cat_id, cat_name, parent_id) VALUES
-(1, 'computers', 0),
-(2, 'clothing', 0),
-(3, 'phones', 0)";
+$sql = "INSERT INTO categories (cat_id, cat_name) VALUES
+(1, 'computers'),
+(2, 'clothing'),
+(3, 'phones')";
 if ($con->query($sql) === FALSE)
   echo "Error adding products user: " . $con->error . "\n";
 
