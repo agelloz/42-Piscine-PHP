@@ -54,7 +54,7 @@ include('admin_functions.php');
         </div>
         <?php 
             echo "<div><iframe name='products' frameborder='0' src='products.php' width='100%'
-            height='500px'></iframe></div>";
+            height='1100px'></iframe></div>";
         ?>
     </body>
 </html>
