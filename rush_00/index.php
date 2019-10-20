@@ -5,6 +5,8 @@ if (!isset($_SESSION["user_id"]))
     $_SESSION["user_id"] = hash('whirlpool', "guest_".session_id());
 if (!isset($_SESSION["admin"]))
     $_SESSION["admin"] = FALSE;
+if (!isset($_SESSION["loggued_on_user"]))
+    $_SESSION["loggued_on_user"] = NULL;
 include('admin_functions.php');
 ?>
 <html>
@@ -30,6 +32,8 @@ include('admin_functions.php');
             }
             if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"] != NULL && $_SESSION["admin"] == TRUE)
                 echo "<a href='admin.php'>Admin</a> - ";
+            if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"] != NULL)
+                echo "<a href=\"delete_account.php\" onclick=\"return confirm('Are you sure?');\">Delete my account</a> - ";
             $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
             $sql = "SELECT products.name FROM cart, products WHERE products.id = cart.product_id AND cart.user_id='" . $_SESSION["user_id"] . "' GROUP BY products.name";
             $run = mysqli_query($con, $sql);

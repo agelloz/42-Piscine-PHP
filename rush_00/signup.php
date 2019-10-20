@@ -3,7 +3,9 @@ session_start();
 $con = mysqli_connect("127.0.0.1", "root", "root", "shop");
 if (!isset($_POST["submit"]) || !isset($_POST["login"]) || !isset($_POST["passwd"]) || $_POST["submit"] != "OK")
     return NULL;
-if ($_POST["login"] != NULL && $_POST["passwd"] != NULL)
+if ($_POST["login"] != NULL && $_POST["passwd"] != NULL
+&& strlen($_POST["login"]) > 4 && strlen($_POST["passwd"]) > 4
+&& ctype_alnum($_POST["login"]) && ctype_alnum($_POST["passwd"]))
 {
     $hashed_pwd = hash('whirlpool', $_POST["passwd"]);
     $query_check = "SELECT login FROM users WHERE login='" . $_POST["login"] . "'";
@@ -21,12 +23,16 @@ if ($_POST["login"] != NULL && $_POST["passwd"] != NULL)
         if (!$run_pro)
             die("ERROR: " . mysqli_error($con));
         header("Refresh: 2;url=login.html");
-        echo "Account created\n";
+        echo "<head><link rel='stylesheet' type='text/css' href='style.css'></head><html><body><h2>Welcome ". $_SESSION["user"] . "! Happy shopping :)</h2></body></html>";
     }
 }
 else
 {
-    header("Refresh: 2;url=signup.html");
-    echo "Error creating account\n";
+    header("Refresh: 4;url=signup.html");
+    echo "<head><link rel='stylesheet' type='text/css' href='style.css'></head>
+    <html><body><h2>
+        Incorrect credentials, please try again.<br>
+        Your username and password must contain between 5 and 30 letters or digits.
+    </h2></body></html>";
 }
 ?>
