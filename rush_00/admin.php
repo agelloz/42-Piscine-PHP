@@ -90,6 +90,13 @@ session_start();
                 if (!($result_delete_category = $con->query($query_delete_category)))
                     echo "Error02qwe <br>".mysqli_error($con)."<br>";
             }
+            if ($_POST['action'] == 'delete_user' && isset($_POST['user_id']))
+            {
+                $user_id = $_POST['user_id'];
+                $query_delete_category = "DELETE FROM users WHERE id = $user_id";
+                if (!($result_delete_category = $con->query($query_delete_category)))
+                    echo "Error01qudw <br>".mysqli_error($con)."<br>";
+            }
             if ($_POST['action'] == 'update_category' && isset($_POST['update_value']) && isset($_POST['cat_id']) && isset($_POST['update_field']))
             {
                 $cat_id = $_POST['cat_id'];
@@ -117,29 +124,26 @@ session_start();
             if ($_POST['action'] == 'update_pw' && isset($_POST['update_value']) && isset($_POST['user_id']) && isset($_POST['update_field']))
             {
                 $user_id = $_POST['user_id'];
-                if ($_POST['update_field'] == 'user_login')
+                if ($_POST['update_field'] == 'user_pw')
                 {
-                    $category_update_value = $_POST['admin'];
+                    $category_update_value = $_POST['update_value'];
                     $query_update_category = "UPDATE users SET password='$category_update_value' WHERE id='$user_id'";
                     if (!($result_update_category = $con->query($query_update_category)))
                         echo "Error03aqapui <br>".mysqli_error($con)."<br>";
                     $_POST['update_value'] = "";
                 }
             }
-            if ($_POST['action'] == 'update_admin' && isset($_POST['update_value']) && isset($_POST['user_id']) && isset($_POST['update_field']))
+            if ($_POST['action'] == 'update_admin' && isset($_POST['user_id']))
             {
                 $user_id = $_POST['user_id'];
-                if ($_POST['update_field'] == 'user_login')
-                {
-                    if (isset($_POST['admin']))
-                        $category_update_value = TRUE;
-                    else
-                        $category_update_value = FALSE;
-                    $query_update_category = "UPDATE users SET is_admin=$category_update_value WHERE id='$user_id'";
-                    if (!($result_update_category = $con->query($query_update_category)))
-                        echo "Error03aqawqui <br>".mysqli_error($con)."<br>";
-                    $_POST['update_value'] = "";
-                }
+                if ($_POST['admin'] == "on")
+                    $category_update_value = 1;
+                else
+                    $category_update_value = 0;
+                $query_update_category = "UPDATE users SET is_admin=$category_update_value WHERE id='$user_id'";
+                if (!($result_update_category = $con->query($query_update_category)))
+                    echo "Error03aqawqui <br>".mysqli_error($con)."<br>";
+                $_POST['update_value'] = "";
             }
             if ($_POST['action'] == 'update_product' && isset($_POST['update_field']) && isset($_POST['product_id']) && isset($_POST['update_value']))
             {
@@ -340,8 +344,8 @@ session_start();
                 {
                     if($row_view_categories['id'] == $_POST['cat_id'])
                     {
-                        $cat_id = $row_view_categories ['id'];
-                        $cat_name = $row_view_categories ['name'];
+                        $cat_id = $row_view_categories['id'];
+                        $cat_name = $row_view_categories['name'];
                         echo "<form action='admin.php' method='post'>";
                         echo "Category_id: ".$_POST['cat_id']."<br>";
                         echo "Category_name: "."    ";
@@ -369,7 +373,7 @@ session_start();
         echo "</form>";
 
         // Users management
-        $sql = "SELECT * FROM users";
+        $sql = "SELECT * FROM users WHERE login!='" . $_SESSION["loggued_on_user"] . "'";
         if (!($res = $con->query($sql)))
             echo "Error0qxx <br>";
         else
@@ -410,7 +414,7 @@ session_start();
                         echo "<form action='admin.php' method='post'>";
                         echo "User_id: " . $_POST['user_id'] . "<br>";
                         echo "User_login:     ";
-                        echo "<input type='text' name='update_login' style='width: 200px' value='$user_login'/>";
+                        echo "<input type='text' name='update_value' style='width: 200px' value='$user_login'/>";
                         echo "<input type='hidden' name='user_id' style='width: 24px' value='$user_id'/>";
                         echo "<input type='hidden' name='update_field' style='width: 24px' value='user_login'/>";
                         echo "<input type='submit' name='action' value='update_login'/>"."<br>";
@@ -418,7 +422,7 @@ session_start();
 
                         echo "<form action='admin.php' method='post'>";
                         echo "User_password: ";
-                        echo "<input type='text' name='update_pw' style='width: 200px' value='$user_pw'/>";
+                        echo "<input type='text' name='update_value' style='width: 200px' value='$user_pw'/>";
                         echo "<input type='hidden' name='user_id' style='width: 24px' value='$user_id'/>";
                         echo "<input type='hidden' name='update_field' style='width: 24px' value='user_pw'/>";
                         echo "<input type='submit' name='action' value='update_pw'/>"."<br>";
@@ -429,7 +433,7 @@ session_start();
                         echo "<input type='checkbox' name='admin' ";
                         if ($user_admin == TRUE)
                             echo "checked";
-                        echo "><label for='$user_id'>is_admin  </label>";
+                        echo "><label for='admin'>is_admin  </label>";
                         echo "<input type='hidden' name='user_id' style='width: 24px' value='$user_id'/>";
                         echo "<input type='hidden' name='update_field' style='width: 24px' value='user_admin'/>";
                         echo "<input type='submit' name='action' value='update_admin'/>"."<br>";
