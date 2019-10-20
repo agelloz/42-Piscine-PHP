@@ -2,7 +2,7 @@
 function retrieve_cats() 
 {
     $con = mysqli_connect("127.0.0.1", "root", "root", "shop");
-    $query_cats = "SELECT * FROM categories";
+    $query_cats = "SELECT categories.cat_name FROM categories, products WHERE products.stock > 0 AND categories.cat_name = products.cat GROUP BY categories.cat_name";
     if (($result = $con->query($query_cats)) === FALSE)
         echo "Error - no categories found\n";
     echo "<div class='tags'>";

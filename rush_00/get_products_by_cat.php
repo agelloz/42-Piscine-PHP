@@ -2,6 +2,7 @@
 function get_products_by_cat() 
 {
     $con = mysqli_connect("127.0.0.1", "root", "root", "shop");
+    $flag = 0;
     if (isset($_GET['cat']) && $_GET['cat'] != 'all')
         $query_products = "SELECT * FROM products WHERE cat='" . $_GET['cat'] . "'";
     else
@@ -15,23 +16,32 @@ function get_products_by_cat()
         $product_stock = $row_product['stock'];
         $product_img = $row_product['img'];
         $product_cat = $row_product['cat'];
-        echo "<div id='periodic-row'>";
-        echo "
-        <div id='product'>
-            <div class='cell'>
-            <h3>$product_name for only <br />$product_price €</h3>
-            <a href='products.php?cat=all'>
-            <img class='products' src='$product_img'/>
-            </a>
-            <form action='add_to_cart.php' method='get'>
-                <input type ='submit' name='add' value='Add to cart'/>
-                <input type ='text' name='qty' value='1'/>
-                <input type ='hidden' name='id' value='$product_id'/>
-            </form>
+        if ($product_stock > 0)
+        {
+            $flag = 1;
+            echo "<div id = periodic-row>";
+            echo "
+            <div id='product'>
+                <div class='cell'>
+                <h3>$product_name for only <br />$product_price €</h3>
+                <a href='products.php?cat=all'>
+                <img class=products src='$product_img'/>
+                </a>
+                <form action='add_to_cart.php' method='get'>
+                    <input type='text' name='qty' value='1'/>
+                    <input type='submit' name='add' value='Add to cart'/>
+                    <input type ='hidden' name='id' value='$product_id'/>
+                    <input type='hidden' name='add_to_cart' value='yes'/>
+                </form>
+                </div>
             </div>
-        </div>
-        ";
-        echo "</div>";
+            ";
+            echo "</div>";
+        }
+    }
+    if ($flag == 0)
+    {
+        echo "Sorry we don't have any products in stock. Please come back later !<br />";
     }
 }
 ?>

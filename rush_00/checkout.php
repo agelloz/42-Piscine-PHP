@@ -2,6 +2,7 @@
 include('add_to_cart.php');
 include('display_cart.php');
 include('remove_from_cart.php');
+include('ft_finalize_cart.php');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -12,7 +13,7 @@ session_start();
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <div class="header" href="index.php">
+    <div class="header" href="index.php">
             <a href="index.php"><img class="logo" src="images/logo.png"/></a>
         </div>
         <?php
@@ -31,6 +32,10 @@ session_start();
             remove_from_cart();
             $_POST["remove_from_cart"] = "";
             echo "We have updated your cart, removing the products you asked<br /><br />";
+        }
+        if (isset($_POST["checkout"]) && $_POST["checkout"] == "yes")
+        {
+            ft_finalize_cart();
         }
         display_cart();
         ?>

@@ -33,14 +33,25 @@ function display_cart()
         else
         {
             echo "<br /> <u>Total order amount</u> : <b>".$supertotal." € (VAT included)</b><br />";
-            //<!--<TO BE FINISHED>---> 
-            if ($_SESSION["loggued_on_user"])
-            {
-                echo "<form action='index.html' method='post'>
-            <input type='submit' name='trash' value='Complete your order'/>
+            //<!--<TO BE FINISHED>--->
+            echo " <br />
+            <form action='index.php' method='post'>
+            <input type='submit' name='trash' value='Add new products to cart'/>
                 </form>
                 <br />
             ";
+            if ($_SESSION["loggued_on_user"])
+            {
+                echo "<form action='checkout.php' method='post'>
+                        <input type='hidden' name='checkout' value='yes'/>
+                        <input type='submit' name='trash' value='Complete your order'/>
+                        </form>
+                        <br />
+                ";
+            }
+            else
+            {
+                echo "<br />To complete your order, please <a href='login.html'>log in</a> or <a href='signup.html'>sign up</a> first. <br />Dont' worry, we will remember your cart contents.<br />";
             }
         }
     }
