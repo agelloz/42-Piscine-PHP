@@ -14,10 +14,10 @@ if (!isset($_SESSION["user_id"]))
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <div class="header" href="index.php">
+    <!--<div class="header" href="index.php">
             <a href="index.php"><img class="logo" src="images/logo.png"/></a>
         </div>
-    </body>
+    </body>*/--> 
 </html>
 
 <?php
