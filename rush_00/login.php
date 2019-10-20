@@ -22,13 +22,13 @@ if (!isset($_POST["login"]) && !isset($_POST["passwd"]))
 {
     $_SESSION["loggued_on_user"] = "";
     echo "Wrong credentials, please try again.\n";
-    header("Refresh: 1;url=login.html");
+    header("Refresh: 2;url=login.html");
 }
 elseif ($_POST["login"] != NULL && $_POST["passwd"] != NULL && auth($_POST["login"], $_POST["passwd"]) == TRUE)
 {
     $_SESSION["loggued_on_user"] = $_POST["login"];
     echo "<head><link rel='stylesheet' type='text/css' href='style.css'></head><html><body><h2>Hello " . $_SESSION["loggued_on_user"] . "!</h2></body></html>";
-    header("Refresh: 2;url=index.php");
+    header("Refresh: 1;url=index.php");
 }
 else
 {
