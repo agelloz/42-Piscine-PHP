@@ -447,6 +447,23 @@ session_start();
                 }
             }
         }
+
+        // Afficher les commandes passees
+        echo "<br><b>Validated orders to send out </b>:<br>";
+        $con = mysqli_connect("127.0.0.1", "root", "root", "shop");
+        $query_display_cart = "SELECT user_id, product_id, quantity FROM `orders` GROUP BY `user_id`, `product_id`, `quantity`";
+        if (!($result = $con->query($query_display_cart)))
+            echo "Error 78 <br>";
+        else
+        {
+            while ($row_cart = mysqli_fetch_array($result))
+            {
+                $cart_product_quantity = $row_cart['quantity'];
+                $product_id = $row_cart['product_id'];
+                $user_id = $row_cart['user_id'];
+                echo $cart_product_quantity." product id <b>".$product_id."</b> to user ".$user_id."<br />";
+            }
+        }
         ?>
     </body>
 </html>
