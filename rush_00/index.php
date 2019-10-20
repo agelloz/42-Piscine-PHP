@@ -24,7 +24,7 @@ if (!isset($_SESSION["user_id"]))
             else
             {
                 echo "<a href='logout.php'>Log out</a> - ";
-                echo "<a href='modif.html'>Change password</a> - ";
+                echo "<a href='modif.html'>Change your password</a> - ";
             }
             if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"])
                 echo "<a href='admin.php'>Admin</a> - ";

@@ -35,11 +35,11 @@ $sql = "CREATE TABLE products (
 if ($con->query($sql) === FALSE)
   echo "Error creating products table: " . $con->error . "\n";
 
-$sql = "INSERT INTO products (name, price, stock, img, cat) VALUES 
-('iMac 5K', 2000, 100, 'https://uno.ma/media/catalog/product/cache/1/image/598x598/9df78eab33525d08d6e5fb8d27136e95/l/d/ld0004425692_2_0004428833_2.jpg', 'computers'),
-('Macbook Pro', 1000, 100, 'https://images-na.ssl-images-amazon.com/images/I/51v8KXJ0nlL._SX425_.jpg', 'computers'),
-('Pair of socks', 1000, 100, 'https://i.etsystatic.com/6572991/r/il/933c89/1623581850/il_570xN.1623581850_i7es.jpg', 'clothing'),
-('Google Pixel 4', 800, 100, 'https://static.toiimg.com/photo/66350481.cms', 'phones')";
+$sql = "INSERT INTO products (id, name, price, stock, img, cat) VALUES 
+(100, 'iMac 5K', 2000, 100, 'https://uno.ma/media/catalog/product/cache/1/image/598x598/9df78eab33525d08d6e5fb8d27136e95/l/d/ld0004425692_2_0004428833_2.jpg', 'computers'),
+(101, 'Macbook Pro', 1000, 100, 'https://images-na.ssl-images-amazon.com/images/I/51v8KXJ0nlL._SX425_.jpg', 'computers'),
+(102, 'Pair of socks', 1000, 100, 'https://i.etsystatic.com/6572991/r/il/933c89/1623581850/il_570xN.1623581850_i7es.jpg', 'clothing'),
+(103, 'Google Pixel 4', 800, 100, 'https://static.toiimg.com/photo/66350481.cms', 'phones')";
 if ($con->query($sql) === FALSE)
   echo "Error adding products user: " . $con->error . "\n";
 
@@ -56,6 +56,21 @@ $sql = "INSERT INTO categories (cat_id, cat_name) VALUES
 if ($con->query($sql) === FALSE)
   echo "Error adding products user: " . $con->error . "\n";
 
+$sql = "CREATE TABLE links_products_categories (
+  link_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  product_id TEXT NOT NULL,
+  cat_id INT UNSIGNED NOT NULL)";
+  if ($con->query($sql) === FALSE)
+    echo "Error creating links_products_categories table: " . $con->error . "\n";
+
+$sql = "INSERT INTO links_products_categories (link_id, product_id, cat_id) VALUES
+  (NULL, 100, 1),
+  (NULL, 101, 1),
+  (NULL, 102, 2),
+  (NULL, 103, 3)";
+  if ($con->query($sql) === FALSE)
+    echo "Error adding products user: " . $con->error . "\n";
+
 $sql = "CREATE TABLE cart (
   id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id TEXT NOT NULL,
@@ -63,6 +78,14 @@ $sql = "CREATE TABLE cart (
   quantity INT UNSIGNED)";
   if ($con->query($sql) === FALSE)
     echo "Error creating cart table: " . $con->error . "\n";
+
+$sql = "CREATE TABLE orders (
+  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  product_id INT UNSIGNED,
+  quantity INT UNSIGNED)";
+  if ($con->query($sql) === FALSE)
+    echo "Error creating orders table: " . $con->error . "\n";
 
 $con->close();
 ?>
