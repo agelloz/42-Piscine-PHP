@@ -25,7 +25,7 @@ include('admin_functions.php');
                     echo "<li><a href='signup.html'>Sign up</a></li>";
                     echo "<li><a href='login.html'>Log in</a></li>";
                 }
-                $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
+                $con = mysqli_connect('', 'root', 'root', 'shop');
                 $sql = "SELECT products.name FROM cart, products WHERE products.id = cart.product_id
                 AND cart.user_id='" . $_SESSION["user_id"] . "' GROUP BY products.name";
                 $run = mysqli_query($con, $sql);

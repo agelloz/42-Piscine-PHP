@@ -17,7 +17,7 @@ session_start();
         if (isset($_SESSION["loggued_on_user"]) && $_SESSION["loggued_on_user"]) 
             echo "<p>Welcome to the admin board " . $_SESSION["loggued_on_user"] . "!</p>";
         // Updates previously asked
-        $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
+        $con = mysqli_connect('', 'root', 'root', 'shop');
         if (isset($_POST['action']))
         {
             if ($_POST['action'] == 'add_category' && isset($_POST['category_name']))
@@ -40,18 +40,12 @@ session_start();
                 if (!($result_add_product = $con->query($query_add_product)))
                     echo "Error01d1 <br>".mysqli_error($con)."<br>";
                 //Start new work
-                $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
-                $query_special_id = "SELECT * FROM `products` WHERE `name` LIKE '$product_name' AND `price` = '$product_price' AND `stock` = '$product_stock'";
+                $query_special_id = "SELECT * FROM products WHERE name LIKE '$product_name' AND price = '$product_price' AND stock = '$product_stock'";
                 if (!($result_special_id = $con->query($query_special_id)))
                     echo "Error0q <br>";
                 else
-                {
                     while ($row_special_id = mysqli_fetch_array($result_special_id)) 
-                    {
                         $product_id = $row_special_id['id'];
-                    }
-                }
-                $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
                 $query_view_categories = "SELECT id, name FROM categories";
                 if (!($result_view_categories = $con->query($query_view_categories)))
                     echo "Error0q3 <br>";
@@ -62,8 +56,7 @@ session_start();
                         $cat_id = $row_view_categories['id'];
                         if (isset($_POST[$cat_id]) && $_POST[$cat_id] == "on")
                         {
-                            $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
-                            $query_insert_link = "INSERT INTO `links_products_categories` (`product_id`, `cat_id`) VALUES ('$product_id', '$cat_id') ";
+                            $query_insert_link = "INSERT INTO links_products_categories (product_id, cat_id) VALUES ('$product_id', '$cat_id')";
                             if (!($result_insert_link = $con->query($query_insert_link)))
                                 echo "Error0q3 <br>";
                         }
@@ -235,7 +228,6 @@ session_start();
                             echo "<input type='submit' name='action' value='update_product'/>"."<br>";
                             echo "</form>";
 
-                            //WORK HERE before push
                             echo "<form action='admin.php' method='post'>";
                             $query_view_categories = "SELECT id, name FROM categories";
                             if (!($result_view_categories = $con->query($query_view_categories)))
@@ -243,14 +235,11 @@ session_start();
                             else
                             {
                                 echo "Categories (facultative - cannot be updated): <br />";
-                                //echo "<input type='submit' name='action' value='update_categories'/>"."<br>";
                                 while ($row_view_categories = mysqli_fetch_array($result_view_categories)) 
                                 {
                                     $cat_id = $row_view_categories['id'];
                                     $cat_name = $row_view_categories['name'];
-
-                                    $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
-                                    $query_insert_link = "SELECT cat_id FROM `links_products_categories` WHERE `product_id` = $product_id AND `cat_id` = $cat_id ";
+                                    $query_insert_link = "SELECT cat_id FROM links_products_categories WHERE product_id = $product_id AND cat_id = $cat_id ";
                                     if (!($result_insert_link = $con->query($query_insert_link)))
                                         echo "Error0q3 <br>";
                                     else
@@ -259,8 +248,6 @@ session_start();
                                         {
                                             if ($row_insert_link['cat_id'] = $cat_id)
                                                 echo "<input type='checkbox' name='$cat_id' checked><label for='$cat_id'>$cat_name</label>";
-                                            //else
-                                            //   echo "<input type='checkbox' name='$cat_id'><label for='$cat_id'>$cat_name</label>";
                                             echo "<br>";
                                         }
                                     }
@@ -268,8 +255,6 @@ session_start();
                             }
                             echo "<input type='hidden' name='product_id' style='width: 24px' value='$product_id'/>";
                             echo "</form>";
-
-                            //WORK HERE before push
 
                             echo "<form action='admin.php' method='post'>";
                             echo "<input type='hidden' name='product_id' value='$product_id'/>";
@@ -450,7 +435,6 @@ session_start();
 
         // Afficher les commandes passees
         echo "<br><b>Validated orders to send out </b>:<br>";
-        $con = mysqli_connect("127.0.0.1", "root", "root", "shop");
         $query_display_cart = "SELECT user_id, product_id, quantity FROM `orders` GROUP BY `user_id`, `product_id`, `quantity`";
         if (!($result = $con->query($query_display_cart)))
             echo "Error 78 <br>";

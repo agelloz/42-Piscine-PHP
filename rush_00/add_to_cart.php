@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("127.0.0.1", "root", "root", "shop");
+$con = mysqli_connect('', 'root', 'root', 'shop');
 if ($_POST['qty'] > 0 && $_POST['qty'] < 10000)
 {
     $sql = "INSERT INTO cart (user_id, product_id, quantity) VALUES ('" . $_SESSION['user_id'] . "', " . $_POST['id'] . ", " . $_POST['qty'] . ")";

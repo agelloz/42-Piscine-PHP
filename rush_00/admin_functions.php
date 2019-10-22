@@ -1,7 +1,7 @@
 <?php
 function    debug_view()
 {
-    $con = mysqli_connect('127.0.0.1', 'root', 'root', 'shop');
+    $con = mysqli_connect('', 'root', 'root', 'shop');
     $sql = "SELECT * FROM users";
     $run = mysqli_query($con, $sql);
     if (isset($_SESSION["loggued_on_user"]) != NULL)
