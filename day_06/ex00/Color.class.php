@@ -2,10 +2,10 @@
 
 class Color 
 {
+    static $verbose = FALSE;
     public $red = 0;
     public $green = 0;
     public $blue = 0;
-    static $verbose = FALSE;
 
     public function __construct(array $kwargs) {
         if (array_key_exists('rgb', $kwargs))
