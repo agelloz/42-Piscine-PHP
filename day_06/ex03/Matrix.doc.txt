@@ -1,4 +1,21 @@
 
 <- Matrix ----------------------------------------------------------------------
+This class is used to create and manipulate 4x4 Matrices.
+The following constant values are used to preset the new matrice:
+IDENTITY    = 'IDENTITY',	(no argument)
+SCALE       = 'SCALE',		(scale argument)
+RX          = 'Ox ROTATION',	(angle argument))
+RY          = 'Oy ROTATION',	(angle argument)
+RZ          = 'Oz ROTATION',	(angle argument)
+TRANSLATION = 'TRANSLATION',	(class Vector argument)
+PROJECTION  = 'PROJECTION';	(field of view in degrees, screen ratio, 
+				 near clipping plane and far clipping plane)
 
+The following methods are provided within this class:
+
+- Matrix mult( Matrix $rhs ): return a new Matrix resulting from the 
+  multiplication of the two matrices
+
+- Vertex transformVertex( Vertex $vtx ): return a new Vertex resulting 
+  from the transformation of the Vertex by the Matrice.
 ---------------------------------------------------------------------- Matrix ->
