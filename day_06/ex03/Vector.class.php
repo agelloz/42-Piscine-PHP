@@ -20,7 +20,7 @@ class   Vector {
             $this->_x = $kwargs['dest']->getX() - $orig->getX();
             $this->_y = $kwargs['dest']->getY() - $orig->getY();
             $this->_z = $kwargs['dest']->getZ() - $orig->getZ();
-            $this->_w = 0;
+            $this->_w = $kwargs['dest']->getW() - $orig->getW();
         }
         if (self::$verbose === TRUE)
             printf("Vector( x:%0.2f, y:%0.2f, z:%0.2f, w:%0.2f ) constructed" . PHP_EOL , $this->_x, $this->_y, $this->_z, $this->_w);

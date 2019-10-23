@@ -23,7 +23,7 @@ print( 'Let\'s start with an harmless identity matrix :' . PHP_EOL );
 $I = new Matrix( array( 'preset' => Matrix::IDENTITY ) );
 print( $I . PHP_EOL . PHP_EOL );
 
-/*print( 'So far, so good. Let\'s create a translation matrix now.' . PHP_EOL );
+print( 'So far, so good. Let\'s create a translation matrix now.' . PHP_EOL );
 $vtx = new Vertex( array( 'x' => 20.0, 'y' => 20.0, 'z' => 0.0 ) );
 $vtc = new Vector( array( 'dest' => $vtx ) );
 $T  = new Matrix( array( 'preset' => Matrix::TRANSLATION, 'vtc' => $vtc ) );
@@ -67,6 +67,6 @@ print( $vtxA . PHP_EOL );
 print( $M . PHP_EOL );
 print( 'Transform the damn vertex !' . PHP_EOL );
 $vtxB = $M->transformVertex( $vtxA );
-print( $vtxB . PHP_EOL . PHP_EOL );*/
+print( $vtxB . PHP_EOL . PHP_EOL );
 
 ?>
