@@ -1,7 +1,6 @@
 <?PHP
 
-class Targaryen
-{
+class Targaryen {
     public function getBurned() {
         if (method_exists($this, 'resistsFire'))
             return ('emerges naked but unharmed');
@@ -9,4 +8,5 @@ class Targaryen
             return ('burns alive');
     }
 }
+
 ?>

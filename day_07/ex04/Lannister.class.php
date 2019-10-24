@@ -1,6 +1,6 @@
 <?php
 
-class Lannister
-{
+class Lannister {
 }
+
 ?>

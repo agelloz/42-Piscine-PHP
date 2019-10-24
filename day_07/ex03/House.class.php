@@ -1,7 +1,6 @@
 <?php
 
-abstract class House
-{
+abstract class House {
 	abstract public function getHouseName();
 	abstract public function getHouseMotto();
 	abstract public function getHouseSeat();
@@ -13,4 +12,5 @@ abstract class House
 					   '"' . PHP_EOL));
 	}
 }
+
 ?>
