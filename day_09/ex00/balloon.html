@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Balloon</title>
+	</head>
+	<body>
+		<div onclick='inflate()' onmouseleave='deflate()' id='balloon'></div>
+		<script>
+			var bal = document.getElementById('balloon');
+			var init_size = 200;
+			var size = init_size;
+			bal.style.backgroundColor = "red";
+			bal.style.borderRadius = '50%';
+			bal.style.height = '200px';
+			bal.style.width = '200px';
+
+			function inflate() {
+				if (size + 5 <= 420)
+					size += 10;
+				else
+					size = init_size;
+				bal.style.height = `${size}px`;
+				bal.style.width = `${size}px`;
+				if (bal.style.backgroundColor == "red")
+					bal.style.backgroundColor = "green";
+				else if (bal.style.backgroundColor == "green")
+					bal.style.backgroundColor = "blue";
+				else if (bal.style.backgroundColor == "blue")
+					bal.style.backgroundColor = "red";
+			}
+			function deflate() {
+				if (size - 5 >= 200)
+					size -= 5;
+				else
+				{
+					size = init_size;
+					return;
+				}
+				bal.style.height = `${size}px`;
+				bal.style.width = `${size}px`;
+				if (bal.style.backgroundColor == "red")
+					bal.style.backgroundColor = "blue";
+				else if (bal.style.backgroundColor == "blue")
+					bal.style.backgroundColor = "green";
+				else if (bal.style.backgroundColor == "green")
+					bal.style.backgroundColor = "red";
+			}
+
+		</script>
+	</body>
+</html>

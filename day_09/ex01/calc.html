@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Calculator</title>
+    </head>
+    <body>
+        <form onsubmit="calc()" id="calc">
+            <input type="text" id="left">
+            <select id="operator">
+                    <option value="plus">+</option>
+                    <option value="minus">-</option>
+                    <option value="mult">*</option>
+                    <option value="div">/</option>
+                    <option value="mod">%</option>
+            </select>
+            <input type="text" id="right">
+            <input type="submit" value="Try me!">
+        </form>
+        <script>
+            setInterval(function(){ alert("Please, use me..."); }, 30000);
+
+            function calc() {
+                var res = 0;
+                var left = parseInt(document.getElementById("left").value);
+                var right = parseInt(document.getElementById("right").value);
+                var ope = document.getElementById("operator").value;
+                if (isNaN(left) || isNaN(right) || left < 0 || right < 0 
+                || document.getElementById("left").value != parseInt(document.getElementById("left").value) 
+                || document.getElementById("right").value != parseInt(document.getElementById("right").value))
+                {
+                    alert("Error :(");
+                    return;
+                }
+                if (ope === "plus")
+                    res = left + right;
+                else if (ope === "minus")
+                    res = left - right;
+                else if (ope === "mult")
+                    res = left * right;
+                else if ((ope === "div" || ope === "mod"))
+                {
+                    if (right === 0)
+                    {
+                        console.log("It’s over 9000!");
+                        alert("It’s over 9000!");
+                        return;
+                    }
+                    if (ope === "div")
+                        res = left / right;
+                    else if (ope === "mod")
+                        res = left % right;
+                }
+                console.log(res);
+                alert(res);
+            }
+        </script>
+    </body>
+</html>
