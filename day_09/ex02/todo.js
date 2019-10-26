@@ -27,29 +27,18 @@ function readCookie(name)
     return null;
 }
 
-function deleteItem()
+function deleteItem() 
 {
-    var i = 0;
-    var array = new Array();
-
-    var items = document.getElementsByClassName("item");
-    while (i < items.length)
+    if (window.confirm(`Are you certain to delete task '${this.textContent}' ?`))
     {
-        items[i].onclick = function() 
-        {
-            if (window.confirm(`Are you certain to delete task '${this.textContent}' ?`))
-            {
-                this.parentNode.removeChild(this);
-                array = [];
-                for (var i = 0; i < items.length; i++)
-                    array.push(items[i].innerText);
-                var cookie = JSON.stringify(array);
-                createCookie("list", cookie, 30);
-            }
-            else
-                return;
-        }
-        i++;
+        var array = new Array();
+        var items = document.getElementsByClassName("item");
+
+        this.parentNode.removeChild(this);
+        for (var i = 0; i < items.length; i++)
+            array.push(items[i].innerText);
+        var cookie = JSON.stringify(array);
+        createCookie("list", cookie, 30);
     }
 }
 
@@ -65,6 +54,7 @@ function createItem()
     var new_item = document.createElement("div");
     new_item.appendChild(text_node);
     new_item.setAttribute("class", "item");
+    new_item.onclick = deleteItem;
     if (list.childElementCount === 0)
     {
         list.appendChild(new_item);
@@ -83,7 +73,6 @@ function createItem()
         var cookie = JSON.stringify(array);
         createCookie("list", cookie, 30);
     }
-    deleteItem();
 }
 
 function createTodo()
@@ -98,8 +87,8 @@ function createTodo()
             var new_item = document.createElement("div");
             new_item.appendChild(text_node);
             new_item.setAttribute("class", "item");
+            new_item.onclick = deleteItem;
             list.appendChild(new_item);
         }
     }
-    deleteItem();
 }
