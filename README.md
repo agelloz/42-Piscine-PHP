@@ -5,3 +5,4 @@ Intro 42 project to the basics of Web technologies:
 * PHP (procedural and object-oriented)
 * Web server
 * SQL
+* Javascript/JQuery
